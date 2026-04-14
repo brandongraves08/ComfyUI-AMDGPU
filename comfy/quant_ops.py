@@ -1,7 +1,11 @@
 import torch
 import logging
+import os
 
 try:
+    if os.environ.get("COMFYUI_DISABLE_COMFY_KITCHEN", "").lower() in ("1", "true", "yes", "on"):
+        raise ImportError("comfy_kitchen disabled by COMFYUI_DISABLE_COMFY_KITCHEN")
+
     import comfy_kitchen as ck
     from comfy_kitchen.tensor import (
         QuantizedTensor,
